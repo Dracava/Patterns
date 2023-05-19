@@ -61,6 +61,10 @@ function draw() {
   //Timer countdown
   if (timerCount < 60 && timerCount > 0) {
     //Draw line
+    //Offset changes after certain amount of time
+    if (timerCount < 20) {
+      (px = pmouseX - 50), (py = pmouseY), (x = mouseX - 50), (y = mouseY);
+    }
     if (mouseIsPressed) {
       if (y > 50) {
         stroke(0);
@@ -78,12 +82,8 @@ function draw() {
   }
   //Pensize changes after certain amount of time
   if (timerCount < 10) {
-    penSize = 4;
+    penSize = 6;
     secondsColorR = 255;
-  }
-  //Offset changes after certain amount of time
-  if (timerCount < 5) {
-    (px = pmouseX - 30), (py = pmouseY), (x = mouseX - 30), (y = mouseY);
   }
 
   if (timerCount < 0 && timerCount > -10) {
@@ -129,7 +129,7 @@ function clearDrawing() {
     background(255);
     drawingCommands.length = 0;
   }
-    //buttonX = width + 50;
-    //buttonY = height + 50;
-    //clearButton.position(buttonX, buttonY);
+  //buttonX = width + 50;
+  //buttonY = height + 50;
+  //clearButton.position(buttonX, buttonY);
 }
