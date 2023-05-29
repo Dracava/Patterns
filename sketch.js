@@ -21,7 +21,7 @@ let x = 0;
 let y = 0;
 
 function setup() {
-  drawingCanvas = createCanvas(windowWidth, windowHeight);
+  drawingCanvas = createCanvas(windowWidth - 50, windowHeight);
   background(255);
 
   //Timer
