@@ -25,7 +25,7 @@ function setup() {
   background(255);
 
   //Timer
-  let timerValue = 10;
+  let timerValue = 60;
 
   //Button clear
   let clearButton = createButton("Clear");
@@ -61,10 +61,6 @@ function draw() {
   //Timer countdown
   if (timerCount < 60 && timerCount > 0) {
     //Draw line
-    //Offset changes after certain amount of time
-    if (timerCount < 20) {
-      (px = pmouseX - 50), (py = pmouseY), (x = mouseX - 50), (y = mouseY);
-    }
     if (mouseIsPressed) {
       if (y > 50) {
         stroke(0);
@@ -77,13 +73,19 @@ function draw() {
   }
 
   if (timerCount < 60 && timerCount > 30) {
+    
   }
-  if (timerCount < 30) {
+  if (timerCount < 20) {
+    py = pmouseX;
+    px = pmouseY;
+    y = mouseX;
+    x = mouseY;
   }
-  //Pensize changes after certain amount of time
   if (timerCount < 10) {
-    penSize = 6;
-    secondsColorR = 255;
+    px = mouseX;
+    py = pmouseY;
+    x = mouseX;
+    y = mouseY;
   }
 
   if (timerCount < 0 && timerCount > -10) {
@@ -132,4 +134,9 @@ function clearDrawing() {
   //buttonX = width + 50;
   //buttonY = height + 50;
   //clearButton.position(buttonX, buttonY);
+}
+
+function touchMoved() {
+  // prevent default
+  return false;
 }
