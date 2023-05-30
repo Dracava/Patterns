@@ -3,6 +3,12 @@ body {
   margin: 0;
   padding: 0;
 
+input {
+-webkit-appearance: none;
+-moz-appearance: none;
+appearance: none;
+}
+  
   .button-style {
     background-color: black;
     font-family: "Roboto", sans-serif;
