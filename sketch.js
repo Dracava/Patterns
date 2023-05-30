@@ -107,17 +107,19 @@ function stateEdit() {
     timerStart = millis();
   }
 
-  if (timerCount < 30 && timerCount > 10) {
+  if (timerCount < 30 && timerCount > 20) {
     py = pmouseY - 100;
     px = pmouseX - 100;
     y = mouseY - 100;
     x = mouseX - 100;
   } else if (timerCount <= 20 && timerCount > 0) {
-    secondsColorR = 255;
     px = height - mouseY;
     py = width - mouseX;
     x = height - pmouseY;
     y = width - pmouseX;
+  }
+  if (timerCount <= 10 && timerCount > 0) {
+    secondsColorR = 255;
   }
 
   //Timer countdown
@@ -146,7 +148,7 @@ function stateEdit() {
     textSize(12);
     text("Time left:", width / 2 - 80, 42);
     fill(secondsColorR, secondsColorG, secondsColorB);
-    text(timerCount, width / 2 - 10, 42);
+    text(0, width / 2 - 10, 42);
     fill(0);
     text("seconds", width / 2 + 10, 42);
   }
