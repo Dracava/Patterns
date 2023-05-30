@@ -87,13 +87,14 @@ function stateEdit() {
   fill(255);
   rect(0, 0, width, 50);
   fill(0);
+  textSize(18);
+  text("Draw a pattern.", width / 2 - 70, 23);
   textSize(12);
-  text("Draw a pattern.", width / 2 - 50, 20);
-  text("Time left:", width / 2 - 80, 40);
+  text("Time left:", width / 2 - 80, 42);
   fill(secondsColorR, secondsColorG, secondsColorB);
-  text(timerCount, width / 2 - 10, 40);
+  text(timerCount, width / 2 - 10, 42);
   fill(0);
-  text("seconds", width / 2 + 10, 40);
+  text("seconds", width / 2 + 10, 42);
 
   //Line coordinates
   var px = pmouseX,
@@ -113,10 +114,10 @@ function stateEdit() {
     x = mouseX - 100;
   } else if (timerCount <= 20 && timerCount > 0) {
     secondsColorR = 255;
-    px = height-mouseY;
-    py = width-mouseX;
-    x = height-pmouseY;
-    y = width-pmouseX;
+    px = height - mouseY;
+    py = width - mouseX;
+    x = height - pmouseY;
+    y = width - pmouseX;
   }
 
   //Timer countdown
@@ -140,12 +141,14 @@ function stateEdit() {
     secondsColorR = 255;
     fill(0);
     noStroke();
-    text("Draw a pattern.", width / 2 - 50, 20);
-    text("Time left:", width / 2 - 80, 40);
+    textSize(18);
+    text("Draw a pattern.", width / 2 - 70, 23);
+    textSize(12);
+    text("Time left:", width / 2 - 80, 42);
     fill(secondsColorR, secondsColorG, secondsColorB);
-    text("0", width / 2 - 10, 40);
+    text(timerCount, width / 2 - 10, 42);
     fill(0);
-    text("seconds", width / 2 + 10, 40);
+    text("seconds", width / 2 + 10, 42);
   }
   if (timerCount <= -10) {
     scale(sf);
