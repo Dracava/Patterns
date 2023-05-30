@@ -1,13 +1,37 @@
-html, body {
+html,
+body {
   margin: 0;
   padding: 0;
+
+  .button-style {
+    background-color: black;
+    font-family: "Roboto", sans-serif;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    cursor: pointer;
+    font-family: "Roboto", sans-serif;
+  }
+
+  .button-style:hover {
+    background-color: #696969;
+    font-family: "Roboto", sans-serif;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    cursor: pointer;
+  }
 }
 canvas {
   display: block;
 }
-
-/*
-main {
-    overflow: hidden;
-}
-*/
