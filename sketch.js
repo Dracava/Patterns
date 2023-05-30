@@ -9,9 +9,9 @@ let secondsColorB = 0;
 let drawingCanvas, saveImage;
 let drawingCommands = [];
 
-let timerStart = 60;
+let timerStart = 40;
 let timerLength = 1000;
-let timerCount = 60;
+let timerCount = 40;
 
 let sf = 1;
 let x = 0;
@@ -50,7 +50,7 @@ function setup() {
   setState(stateStart);
 
   //Timer
-  let timerValue = 60;
+  let timerValue = 40;
 
   //Arrow buttons to select pattern
   leftButton = createButton(">");
@@ -104,6 +104,9 @@ function stateEdit() {
   fill(255);
   rect(0, 0, width, 50);
   fill(0);
+  textSize(7);
+  text("lol, fuck you", 14, 25);
+  textSize(12);
   text("Draw a pattern.", width / 2 - 50, 20);
   text("Time left:", width / 2 - 80, 40);
   fill(secondsColorR, secondsColorG, secondsColorB);
@@ -123,11 +126,12 @@ function stateEdit() {
   }
 
   if (timerCount < 20 && timerCount > 10) {
-    py = pmouseY + 100;
-    px = pmouseX + 100;
-    y = mouseY + 100;
-    x = mouseX + 100;
+    py = pmouseY - 100;
+    px = pmouseX - 100;
+    y = mouseY - 100;
+    x = mouseX - 100;
   } else if (timerCount <= 10 && timerCount > 0) {
+    secondsColorR = 255;
     px = pmouseY;
     py = pmouseX;
     x = mouseY;
@@ -152,7 +156,7 @@ function stateEdit() {
     strokeWeight(1);
     fill(255);
     rect(0, 0, width, 50);
-    secondsColorG = 255;
+    secondsColorR = 255;
     fill(0);
     noStroke();
     text("Draw a pattern.", width / 2 - 50, 20);
@@ -203,7 +207,7 @@ function clearDrawing() {
     }
     drawingCommands.length = 0;
   }
-  if (timerCount < 50) {
+  if (timerCount < 35) {
     clearButton.position(windowWidth + 100, windowHeight + 100);
   }
 }
@@ -212,13 +216,13 @@ function clearDrawing() {
 function viewGrid() {
   stroke(255, 100, 100);
   strokeWeight(1);
-  
+
   const gridSize = 100;
   const gridLinesX = width / gridSize;
   const gridLinesY = height / gridSize;
 
   if (!gridVisible) {
-    if (timerCount > 45) {
+    if (timerCount > 25) {
       for (let i = 0; i < gridLinesY; i++) {
         const y = i * gridSize;
         line(0, y, width, y);
@@ -250,6 +254,10 @@ function viewGrid() {
       stroke(0);
       strokeWeight(penSize);
       line(px, py, x, y);
+
+      if (timerCount < 20) {
+        gridButton.position(windowWidth + 100, windowHeight + 100);
+      }
       gridVisible = false;
     }
   }
