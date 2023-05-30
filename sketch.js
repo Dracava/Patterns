@@ -113,10 +113,10 @@ function stateEdit() {
     y = mouseY - 100;
     x = mouseX - 100;
   } else if (timerCount <= 20 && timerCount > 0) {
-    px = height - mouseY;
-    py = width - mouseX;
-    x = height - pmouseY;
-    y = width - pmouseX;
+    px = height - mouseX;
+    py = width - mouseY;
+    x = height - pmouseX;
+    y = width - pmouseY;
   }
   if (timerCount <= 10 && timerCount > 0) {
     secondsColorR = 255;
