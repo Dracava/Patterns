@@ -17,30 +17,17 @@ let sf = 1;
 let x = 0;
 let y = 0;
 
-let rightButton;
-let leftButton;
 let confirmButton;
 let clearButton;
 let gridButton;
 
 let gridVisible = false;
 
-let imagePattern0, imagePattern1, imagePattern2, imagePattern3;
-let imageArray = [];
-let currentPicture = 0;
-
 // to call the following functions:
 // stateStart(), stateEdit(), stateShowPattern(), stateZoomOut(), stateZoomIn()
 let state;
 // the start time of the current state
 let stateStartMillis;
-
-function preload() {
-  imagePattern0 = loadImage("images/pattern0.png");
-  imagePattern1 = loadImage("images/pattern1.png");
-  imagePattern2 = loadImage("images/pattern2.jpeg");
-  imagePattern3 = loadImage("images/pattern3.jpeg");
-}
 
 function setup() {
   drawingCanvas = createCanvas(windowWidth - 1, windowHeight - 1);
@@ -52,28 +39,23 @@ function setup() {
   //Timer
   let timerValue = 40;
 
-  //Arrow buttons to select pattern
-  leftButton = createButton(">");
-  leftButton.position(width - 50, height / 2 - 15);
-  leftButton.mousePressed(nextImage);
-  rightButton = createButton("<");
-  rightButton.position(50, height / 2 - 15);
-  rightButton.mousePressed(previousImage);
-
   //Confirm choice of pattern
-  confirmButton = createButton("Confirm background");
+  confirmButton = createButton("Start!");
   confirmButton.position(width / 2 - 40, height / 2 + 15);
-  confirmButton.mousePressed(confirmChoice);
+  confirmButton.mousePressed(confirmStart);
+  confirmButton.class("button-style");
 
   //Clear the screen button
   clearButton = createButton("Clear");
   clearButton.position(windowWidth + 100, windowHeight + 100);
   clearButton.mousePressed(clearDrawing);
+  clearButton.class("button-style");
 
   //Grid option
   gridButton = createButton("Grid");
   gridButton.position(windowWidth + 100, windowHeight + 100);
   gridButton.mousePressed(viewGrid);
+  gridButton.class("button-style");
 }
 
 function draw() {
@@ -88,14 +70,15 @@ function setState(newState) {
 }
 
 function stateStart() {
-  imageArray = [imagePattern0, imagePattern1, imagePattern2, imagePattern3];
-  image(imageArray[currentPicture], 0, 0, width, height);
   fill(0);
   noStroke();
-  let introText =
-    "Either pick a pattern to trace over, or draw one on your own";
-  let introWidth = textWidth(introText);
-  text(introText, width / 2 - introWidth / 2, height / 2 - 20);
+  textSize(25);
+  let introText1 = "Draw a pattern on the white canvas.";
+  let introText2 = "Click the button to start the experience.";
+  let introWidth1 = textWidth(introText1);
+  let introWidth2 = textWidth(introText2);
+  text(introText1, width / 2 - introWidth1 / 2, height / 2 - 50);
+  text(introText2, width / 2 - introWidth2 / 2, height / 2 - 20);
 }
 
 function stateEdit() {
@@ -104,8 +87,6 @@ function stateEdit() {
   fill(255);
   rect(0, 0, width, 50);
   fill(0);
-  textSize(7);
-  text("lol, fuck you", 14, 25);
   textSize(12);
   text("Draw a pattern.", width / 2 - 50, 20);
   text("Time left:", width / 2 - 80, 40);
@@ -132,10 +113,14 @@ function stateEdit() {
     x = mouseX - 100;
   } else if (timerCount <= 10 && timerCount > 0) {
     secondsColorR = 255;
-    px = pmouseY;
-    py = pmouseX;
-    x = mouseY;
-    y = mouseX;
+    if (pmouseX < width && mouseX < width) {
+      if (pmouseY < height && mouseY < height) {
+        px = pmouseY;
+        py = pmouseX;
+        x = mouseY;
+        y = mouseX;
+      }
+    }
   }
 
   //Timer countdown
@@ -202,9 +187,6 @@ function clearDrawing() {
   if (drawingCommands.length > 0) {
     // Clear the canvas
     background(255);
-    if (currentPicture != 0) {
-      image(imageArray[currentPicture], 0, 0, width, height);
-    }
     drawingCommands.length = 0;
   }
   if (timerCount < 35) {
@@ -222,7 +204,7 @@ function viewGrid() {
   const gridLinesY = height / gridSize;
 
   if (!gridVisible) {
-    if (timerCount > 25) {
+    if (timerCount > 30) {
       for (let i = 0; i < gridLinesY; i++) {
         const y = i * gridSize;
         line(0, y, width, y);
@@ -246,16 +228,13 @@ function viewGrid() {
     }
   } else {
     background(255);
-    if (currentPicture != 0) {
-      image(imageArray[currentPicture], 0, 0, width, height);
-    }
     for (let i = 0; i < drawingCommands.length; i++) {
       let [px, py, x, y] = drawingCommands[i];
       stroke(0);
       strokeWeight(penSize);
       line(px, py, x, y);
 
-      if (timerCount < 20) {
+      if (timerCount < 30) {
         gridButton.position(windowWidth + 100, windowHeight + 100);
       }
       gridVisible = false;
@@ -263,28 +242,13 @@ function viewGrid() {
   }
 }
 
-//Confirm choice
-function confirmChoice() {
+//Confirm starting drawing
+function confirmStart() {
   background(255);
-  if (currentPicture != 0) {
-    image(imageArray[currentPicture], 0, 0, width, height);
-  }
   clearButton.position(10, 10);
-  gridButton.position(70, 10);
+  gridButton.position(90, 10);
   confirmButton.position(windowWidth + 100, windowHeight + 100);
-  leftButton.position(windowWidth + 150, windowHeight + 10);
-  rightButton.position(windowWidth + 100, windowHeight + 100);
   state = stateEdit;
-}
-
-function nextImage() {
-  // Move to the next item in the array
-  currentPicture = (currentPicture + 1) % imageArray.length;
-}
-
-function previousImage() {
-  // Move to the previous item in the array
-  currentPicture = (currentPicture - 1 + imageArray.length) % imageArray.length;
 }
 
 function touchMoved() {
