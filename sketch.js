@@ -106,21 +106,17 @@ function stateEdit() {
     timerStart = millis();
   }
 
-  if (timerCount < 20 && timerCount > 10) {
+  if (timerCount < 30 && timerCount > 10) {
     py = pmouseY - 100;
     px = pmouseX - 100;
     y = mouseY - 100;
     x = mouseX - 100;
-  } else if (timerCount <= 10 && timerCount > 0) {
+  } else if (timerCount <= 20 && timerCount > 0) {
     secondsColorR = 255;
-    if (pmouseX < width && mouseX < width) {
-      if (pmouseY < height && mouseY < height) {
-        px = pmouseY;
-        py = pmouseX;
-        x = mouseY;
-        y = mouseX;
-      }
-    }
+    px = height-mouseY;
+    py = width-mouseX;
+    x = height-pmouseY;
+    y = width-pmouseX;
   }
 
   //Timer countdown
