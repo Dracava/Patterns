@@ -114,10 +114,10 @@ function stateEdit() {
     x = mouseX - 100;
   } else if (timerCount <= 10 && timerCount > 0) {
     secondsColorR = 255;
-    px = height - mouseX;
-    py = width - mouseY;
-    x = height - pmouseX;
-    y = width - pmouseY;
+    px = width - mouseX;
+    py = height - mouseY;
+    x = width - pmouseX;
+    y = height - pmouseY;
   }
 
   //Timer countdown
