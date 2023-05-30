@@ -88,7 +88,7 @@ function stateEdit() {
   rect(0, 0, width, 50);
   fill(0);
   textSize(18);
-  text("Draw a pattern.", width / 2 - 70, 23);
+  text("Draw a pattern", width / 2 - 70, 23);
   textSize(12);
   text("Time left:", width / 2 - 80, 42);
   fill(secondsColorR, secondsColorG, secondsColorB);
@@ -107,19 +107,17 @@ function stateEdit() {
     timerStart = millis();
   }
 
-  if (timerCount < 30 && timerCount > 20) {
+  if (timerCount < 20 && timerCount > 10) {
     py = pmouseY - 100;
     px = pmouseX - 100;
     y = mouseY - 100;
     x = mouseX - 100;
-  } else if (timerCount <= 20 && timerCount > 0) {
+  } else if (timerCount <= 10 && timerCount > 0) {
+    secondsColorR = 255;
     px = height - mouseX;
     py = width - mouseY;
     x = height - pmouseX;
     y = width - pmouseY;
-  }
-  if (timerCount <= 10 && timerCount > 0) {
-    secondsColorR = 255;
   }
 
   //Timer countdown
@@ -144,7 +142,7 @@ function stateEdit() {
     fill(0);
     noStroke();
     textSize(18);
-    text("Draw a pattern.", width / 2 - 70, 23);
+    text("Draw a pattern", width / 2 - 70, 23);
     textSize(12);
     text("Time left:", width / 2 - 80, 42);
     fill(secondsColorR, secondsColorG, secondsColorB);
@@ -253,6 +251,6 @@ function confirmStart() {
 }
 
 function touchMoved() {
-  // prevent default
+  //Prevent scrolling and refreshing screen
   return false;
 }
