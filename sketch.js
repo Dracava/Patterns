@@ -9,25 +9,31 @@ let secondsColorB = 0;
 let drawingCanvas, saveImage;
 let drawingCommands = [];
 
-let timerStart = 30;
+let timerStart = 10;
 let timerLength = 1000;
-let timerCount = 30;
+let timerCount = 10;
 
-let sf = 1;
+let mirrorZoom = 1;
+let boardZoom = 1;
+
 let x = 0;
 let y = 0;
 
 let confirmButton;
 let clearButton;
 let gridButton;
+let restartButton;
 
 let gridVisible = false;
+let pattern;
 
-// to call the following functions:
-// stateStart(), stateEdit(), stateShowPattern(), stateZoomOut(), stateZoomIn()
 let state;
-// the start time of the current state
 let stateStartMillis;
+
+const GRID_SIZE = 4;
+const MAX_OPTIONS = GRID_SIZE * GRID_SIZE;
+let screenshots = [];
+let currentOption = 0;
 
 function setup() {
   drawingCanvas = createCanvas(windowWidth - 1, windowHeight - 1);
@@ -53,6 +59,11 @@ function setup() {
   gridButton.position(windowWidth + 100, windowHeight + 100);
   gridButton.mousePressed(viewGrid);
   gridButton.class("button-style");
+
+  //Restart
+  restartButton = createButton("Restart");
+  restartButton.mousePressed(restartDrawing);
+  restartButton.class("button-style");
 }
 
 function draw() {
@@ -60,13 +71,13 @@ function draw() {
 }
 
 function setState(newState) {
-  // setting the state updates the state variable with the given function
   state = newState;
-  // and recording the start of the new state
   stateStartMillis = millis();
 }
 
 function stateStart() {
+  restartButton.position(windowWidth + 100, windowHeight + 100);
+  background(255);
   fill(0);
   noStroke();
   textSize(25);
@@ -76,6 +87,7 @@ function stateStart() {
   let introWidth2 = textWidth(introText2);
   text(introText1, width / 2 - introWidth1 / 2, height / 2 - 50);
   text(introText2, width / 2 - introWidth2 / 2, height / 2 - 20);
+  confirmButton.position(width / 2 - 40, height / 2 + 15);
 }
 
 function stateEdit() {
@@ -90,15 +102,12 @@ function stateEdit() {
     timerStart = millis();
   }
 
-  if (timerCount < 25) {
-    clearButton.remove();
-  }
   if (timerCount < 20 && timerCount > 10) {
     py = pmouseY - 100;
     px = pmouseX - 100;
     y = mouseY - 100;
     x = mouseX - 100;
-  } else if (timerCount <= 10 && timerCount > 0) {
+  } else if (timerCount <= 10 && 0 <= timerCount) {
     secondsColorR = 255;
     px = width - mouseX;
     py = height - mouseY;
@@ -107,7 +116,7 @@ function stateEdit() {
   }
 
   //Timer countdown
-  if (timerCount < 60 && timerCount > 0) {
+  if (timerCount < 40 && 0 <= timerCount) {
     //Top banner with text and timer
     noStroke();
     fill(255);
@@ -135,12 +144,11 @@ function stateEdit() {
 
   if (timerCount < 0) {
     if (timerCount > -5) {
-      strokeWeight(1);
+      noStroke();
       fill(255);
       rect(0, 0, width, 50);
       secondsColorR = 255;
       fill(0);
-      noStroke();
       textSize(18);
       text("Draw a pattern", width / 2 - 70, 23);
       textSize(12);
@@ -150,32 +158,36 @@ function stateEdit() {
       fill(0);
       text("seconds", width / 2 + 10, 42);
     }
-
-    if (dist(mouseX, mouseY, width - 50, 0) <= 50) {
-      gridButton.remove();
-      scale(sf);
-      translate(0, 0);
-      background(255);
-      for (let i = 0; i < drawingCommands.length; i++) {
-        let [px, py, x, y] = drawingCommands[i];
-        stroke(0);
-        strokeWeight(penSize);
-        line(px, py, x, y);
-        line(width * 2 - x, y, width * 2 - px, py);
-        line(x, height * 2 - y, px, height * 2 - py);
-        line(width * 2 - x, height * 2 - y, width * 2 - px, height * 2 - py);
-      }
-      if (sf > 0.5) {
-        sf *= 0.995;
-      } else if (sf == 0.5) {
-        pattern = createImage(width, height);
-      }
-    }
   }
 }
 
-function stateReveal() {
-  background(0);
+function stateRevealMirror() {
+  gridButton.position(windowWidth + 100, windowHeight + 100);
+  clearButton.position(windowWidth + 100, windowHeight + 100);
+  scale(mirrorZoom);
+  translate(0, 0);
+  background(255);
+  for (let i = 0; i < drawingCommands.length; i++) {
+    let [px, py, x, y] = drawingCommands[i];
+    stroke(0);
+    strokeWeight(penSize);
+    line(px, py, x, y);
+    line(width * 2 - x, y, width * 2 - px, py);
+    line(x, height * 2 - y, px, height * 2 - py);
+    line(width * 2 - x, height * 2 - y, width * 2 - px, height * 2 - py);
+  }
+  if (mirrorZoom > 0.5) {
+    mirrorZoom *= 0.995;
+  } else if (mirrorZoom <= 0.5) {
+    pattern = get(0, 0, width, height);
+  }
+}
+
+function stateRevealBoard() {
+  if (currentOption == MAX_OPTIONS) {
+    restartLoop();
+  }
+  drawGrid();
 }
 
 //Clear drawing
@@ -236,16 +248,72 @@ function confirmStart() {
   background(255);
   clearButton.position(10, 10);
   gridButton.position(90, 10);
-  confirmButton.remove();
+  confirmButton.position(windowWidth + 100, windowHeight + 100);
   state = stateEdit;
 }
 
 function mouseClicked() {
-  if (timerCount < 0) {
-    if (dist(mouseX, mouseY, 0, 0) <= 50) {
-      state = stateReveal;
+  if (dist(mouseX, mouseY, width - 50, 0) <= 50) {
+    if (timerCount < -5) {
+      state = stateRevealMirror;
+    }
+    if (mirrorZoom <= 0.5) {
+      state = stateRevealBoard;
+      if (currentOption < MAX_OPTIONS) {
+        takeScreenshot();
+      }
     }
   }
+}
+
+function takeScreenshot() {
+  screenshots[currentOption] = get(0, 0, width, height);
+  image(pattern, 0, 0, width, height);
+  currentOption++;
+}
+
+function drawGrid() {
+  const gridSize = width / GRID_SIZE;
+  let optionIndex = 0;
+  background(255);
+
+  for (let y = 0; y < GRID_SIZE; y++) {
+    for (let x = 0; x < GRID_SIZE; x++) {
+      const screenshot = screenshots[optionIndex];
+      if (screenshot) {
+        image(screenshot, x * gridSize, y * gridSize, gridSize, gridSize);
+      }
+      optionIndex++;
+      if (mouseIsPressed) {
+        restartButton.position(windowWidth / 2 - 30, windowHeight / 2 - 30);
+      }
+    }
+  }
+}
+
+function restartLoop() {
+  currentOption = 0;
+}
+
+function restartDrawing() {
+  secondsColorR = 0;
+  secondsColorG = 0;
+  secondsColorB = 0;
+
+  drawingCommands = [];
+
+  timerStart = 10;
+  timerLength = 1000;
+  timerCount = 10;
+
+  mirrorZoom = 1;
+
+  x = 0;
+  y = 0;
+
+  gridVisible = false;
+
+  state = stateStart;
 }
 
 function touchMoved() {
