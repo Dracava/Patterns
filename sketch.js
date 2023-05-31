@@ -9,9 +9,9 @@ let secondsColorB = 0;
 let drawingCanvas, saveImage;
 let drawingCommands = [];
 
-let timerStart = 40;
+let timerStart = 10;
 let timerLength = 1000;
-let timerCount = 40;
+let timerCount = 10;
 
 let sf = 1;
 let x = 0;
@@ -35,9 +35,6 @@ function setup() {
 
   //Set the initial state to beginning
   setState(stateStart);
-
-  //Timer
-  let timerValue = 40;
 
   //Confirm choice of pattern
   confirmButton = createButton("Start!");
@@ -82,20 +79,6 @@ function stateStart() {
 }
 
 function stateEdit() {
-  //Top banner with text and timer
-  noStroke();
-  fill(255);
-  rect(0, 0, width, 50);
-  fill(0);
-  textSize(18);
-  text("Draw a pattern", width / 2 - 70, 23);
-  textSize(12);
-  text("Time left:", width / 2 - 80, 42);
-  fill(secondsColorR, secondsColorG, secondsColorB);
-  text(timerCount, width / 2 - 10, 42);
-  fill(0);
-  text("seconds", width / 2 + 10, 42);
-
   //Line coordinates
   var px = pmouseX,
     py = pmouseY,
@@ -107,6 +90,10 @@ function stateEdit() {
     timerStart = millis();
   }
 
+  if (timerCount < 30) {
+    clearButton.remove();
+    gridButton.remove();
+  }
   if (timerCount < 20 && timerCount > 10) {
     py = pmouseY - 100;
     px = pmouseX - 100;
@@ -122,6 +109,19 @@ function stateEdit() {
 
   //Timer countdown
   if (timerCount < 60 && timerCount > 0) {
+    //Top banner with text and timer
+    noStroke();
+    fill(255);
+    rect(0, 0, width, 50);
+    fill(0);
+    textSize(18);
+    text("Draw a pattern", width / 2 - 70, 23);
+    textSize(12);
+    text("Time left:", width / 2 - 80, 42);
+    fill(secondsColorR, secondsColorG, secondsColorB);
+    text(timerCount, width / 2 - 10, 42);
+    fill(0);
+    text("seconds", width / 2 + 10, 42);
     //Draw line
     if (mouseIsPressed) {
       if (y > 50) {
@@ -134,45 +134,43 @@ function stateEdit() {
     }
   }
 
-  if (timerCount < 0 && timerCount > -10) {
-    strokeWeight(1);
-    fill(255);
-    rect(0, 0, width, 50);
-    secondsColorR = 255;
-    fill(0);
-    noStroke();
-    textSize(18);
-    text("Draw a pattern", width / 2 - 70, 23);
-    textSize(12);
-    text("Time left:", width / 2 - 80, 42);
-    fill(secondsColorR, secondsColorG, secondsColorB);
-    text(0, width / 2 - 10, 42);
-    fill(0);
-    text("seconds", width / 2 + 10, 42);
-  }
-  if (timerCount <= -10) {
-    scale(sf);
-    translate(0, 0);
-    translate();
-    background(255);
-    for (let i = 0; i < drawingCommands.length; i++) {
-      let [px, py, x, y] = drawingCommands[i];
-      stroke(0);
-      strokeWeight(penSize);
-      line(px, py, x, y);
-      line(width * 2 - x, y, width * 2 - px, py);
-      line(x, height * 2 - y, px, height * 2 - py);
-      line(width * 2 - x, height * 2 - y, width * 2 - px, height * 2 - py);
+  if (timerCount < 0) {
+    if (timerCount > -5) {
+      strokeWeight(1);
+      fill(255);
+      rect(0, 0, width, 50);
+      secondsColorR = 255;
+      fill(0);
+      noStroke();
+      textSize(18);
+      text("Draw a pattern", width / 2 - 70, 23);
+      textSize(12);
+      text("Time left:", width / 2 - 80, 42);
+      fill(secondsColorR, secondsColorG, secondsColorB);
+      text(0, width / 2 - 10, 42);
+      fill(0);
+      text("seconds", width / 2 + 10, 42);
     }
-  }
-  if (timerCount <= -11 && sf > 0.5) {
-    sf *= 0.995;
-  } else if (sf == 0.5) {
-    //saveCanvas = drawingCanvas.get(0,50,width,height-50);
-    //saveCanvas.save('pattern', 'png');
 
-    if (mouseIsPressed) {
-      state = stateReveal;
+    if (dist(mouseX, mouseY, width - 50, 0) <= 50) {
+      scale(sf);
+      translate(0, 0);
+      background(255);
+      for (let i = 0; i < drawingCommands.length; i++) {
+        let [px, py, x, y] = drawingCommands[i];
+        stroke(0);
+        strokeWeight(penSize);
+        line(px, py, x, y);
+        line(width * 2 - x, y, width * 2 - px, py);
+        line(x, height * 2 - y, px, height * 2 - py);
+        line(width * 2 - x, height * 2 - y, width * 2 - px, height * 2 - py);
+      }
+    
+      if (sf > 0.5) {
+        sf *= 0.995;
+      } else if (sf == 0.5) {
+        pattern = createImage(width, height);
+      }
     }
   }
 }
@@ -189,7 +187,7 @@ function clearDrawing() {
     drawingCommands.length = 0;
   }
   if (timerCount < 35) {
-    clearButton.position(windowWidth + 100, windowHeight + 100);
+    clearButton.remove();
   }
 }
 
@@ -234,7 +232,7 @@ function viewGrid() {
       line(px, py, x, y);
 
       if (timerCount < 30) {
-        gridButton.position(windowWidth + 100, windowHeight + 100);
+        gridButton.remove();
       }
       gridVisible = false;
     }
@@ -246,8 +244,16 @@ function confirmStart() {
   background(255);
   clearButton.position(10, 10);
   gridButton.position(90, 10);
-  confirmButton.position(windowWidth + 100, windowHeight + 100);
+  confirmButton.remove();
   state = stateEdit;
+}
+
+function mouseClicked() {
+  if (timerCount < 0) {
+    if (dist(mouseX, mouseY, 0, 0) <= 50) {
+      state = stateReveal;
+    }
+  }
 }
 
 function touchMoved() {
