@@ -273,7 +273,8 @@ function takeScreenshot() {
 }
 
 function drawGrid() {
-  const gridSize = width / GRID_SIZE;
+  const gridWidth = width / GRID_SIZE;
+  const gridHeight = height / GRID_SIZE;
   let optionIndex = 0;
   background(255);
 
@@ -281,7 +282,7 @@ function drawGrid() {
     for (let x = 0; x < GRID_SIZE; x++) {
       const screenshot = screenshots[optionIndex];
       if (screenshot) {
-        image(screenshot, x * gridSize, y * gridSize, gridSize, gridSize);
+        image(screenshot, x * gridWidth, y * gridHeight, gridWidth, gridHeight);
       }
       optionIndex++;
       if (mouseIsPressed) {
