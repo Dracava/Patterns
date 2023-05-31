@@ -9,9 +9,9 @@ let secondsColorB = 0;
 let drawingCanvas, saveImage;
 let drawingCommands = [];
 
-let timerStart = 10;
+let timerStart = 30;
 let timerLength = 1000;
-let timerCount = 10;
+let timerCount = 30;
 
 let sf = 1;
 let x = 0;
@@ -90,9 +90,8 @@ function stateEdit() {
     timerStart = millis();
   }
 
-  if (timerCount < 30) {
+  if (timerCount < 25) {
     clearButton.remove();
-    gridButton.remove();
   }
   if (timerCount < 20 && timerCount > 10) {
     py = pmouseY - 100;
@@ -153,6 +152,7 @@ function stateEdit() {
     }
 
     if (dist(mouseX, mouseY, width - 50, 0) <= 50) {
+      gridButton.remove();
       scale(sf);
       translate(0, 0);
       background(255);
@@ -165,7 +165,6 @@ function stateEdit() {
         line(x, height * 2 - y, px, height * 2 - py);
         line(width * 2 - x, height * 2 - y, width * 2 - px, height * 2 - py);
       }
-    
       if (sf > 0.5) {
         sf *= 0.995;
       } else if (sf == 0.5) {
@@ -186,9 +185,6 @@ function clearDrawing() {
     background(255);
     drawingCommands.length = 0;
   }
-  if (timerCount < 35) {
-    clearButton.remove();
-  }
 }
 
 //View grid
@@ -196,12 +192,12 @@ function viewGrid() {
   stroke(255, 100, 100);
   strokeWeight(1);
 
-  const gridSize = 100;
+  const gridSize = 80;
   const gridLinesX = width / gridSize;
   const gridLinesY = height / gridSize;
 
   if (!gridVisible) {
-    if (timerCount > 30) {
+    if (timerCount > 10) {
       for (let i = 0; i < gridLinesY; i++) {
         const y = i * gridSize;
         line(0, y, width, y);
@@ -230,10 +226,6 @@ function viewGrid() {
       stroke(0);
       strokeWeight(penSize);
       line(px, py, x, y);
-
-      if (timerCount < 30) {
-        gridButton.remove();
-      }
       gridVisible = false;
     }
   }
