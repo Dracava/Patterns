@@ -102,12 +102,12 @@ function stateEdit() {
     timerStart = millis();
   }
 
-  if (timerCount < 15 && timerCount > 10) {
+  if (timerCount < 10 && timerCount > 5) {
     py = pmouseY - 100;
     px = pmouseX - 100;
     y = mouseY - 100;
     x = mouseX - 100;
-  } else if (timerCount <= 10 && 0 <= timerCount) {
+  } else if (timerCount <= 5 && 0 <= timerCount) {
     secondsColorR = 255;
     px = width - mouseX;
     py = height - mouseY;
@@ -197,7 +197,7 @@ function clearDrawing() {
     background(255);
     drawingCommands.length = 0;
   }
-  if (timerCount <= 25) {
+  if (timerCount <= 35) {
     clearButton.position(-100, -100);
   }
 }
