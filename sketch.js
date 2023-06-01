@@ -56,7 +56,7 @@ function setup() {
 
   //Grid option
   gridButton = createButton("Grid");
-  gridButton.position(width + 100, height + 100);
+  gridButton.position(-100, -100);
   gridButton.mousePressed(viewGrid);
   gridButton.class("button-style");
 
