@@ -50,13 +50,13 @@ function setup() {
 
   //Clear the screen button
   clearButton = createButton("Clear");
-  clearButton.position(windowWidth + 100, windowHeight + 100);
+  clearButton.position(width + 100, height + 100);
   clearButton.mousePressed(clearDrawing);
   clearButton.class("button-style");
 
   //Grid option
   gridButton = createButton("Grid");
-  gridButton.position(windowWidth + 100, windowHeight + 100);
+  gridButton.position(width + 100, height + 100);
   gridButton.mousePressed(viewGrid);
   gridButton.class("button-style");
 
@@ -76,7 +76,7 @@ function setState(newState) {
 }
 
 function stateStart() {
-  restartButton.position(windowWidth + 100, windowHeight + 100);
+  restartButton.position(width + 100, height + 100);
   background(255);
   fill(0);
   noStroke();
