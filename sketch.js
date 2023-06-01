@@ -102,7 +102,7 @@ function stateEdit() {
     timerStart = millis();
   }
 
-  if (timerCount < 15 && timerCount > 10) {
+  if (timerCount < 20 && timerCount > 10) {
     py = pmouseY - 100;
     px = pmouseX - 100;
     y = mouseY - 100;
