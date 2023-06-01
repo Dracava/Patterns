@@ -209,7 +209,7 @@ function viewGrid() {
   const gridLinesY = height / gridSize;
 
   if (!gridVisible) {
-    if (timerCount > 10) {
+    if (timerCount > 20) {
       for (let i = 0; i < gridLinesY; i++) {
         const y = i * gridSize;
         line(0, y, width, y);
@@ -256,7 +256,7 @@ function mouseClicked() {
   if (timerCount <= 25) {
     clearButton.position(-100, -100);
   }
-  if (dist(mouseX, mouseY, width - 50, 0) <= 50) {
+  if (dist(mouseX, mouseY, width - 100, 0) <= 100) {
     if (timerCount < -5) {
       state = stateRevealMirror;
     }
@@ -289,7 +289,7 @@ function drawGrid() {
       }
       optionIndex++;
       if (mouseIsPressed) {
-        restartButton.position(width / 2 - 30, height / 2 - 30);
+        restartButton.position(width / 2 - 40, height / 2);
       }
     }
   }
