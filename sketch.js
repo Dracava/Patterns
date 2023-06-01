@@ -158,8 +158,6 @@ function stateEdit() {
       fill(0);
       text("seconds", width / 2 + 10, 42);
     }
-    fill(220);
-    rect(width-100, 0, 100, 100);
   }
 }
 
