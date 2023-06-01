@@ -116,7 +116,7 @@ function stateEdit() {
   }
 
   //Timer countdown
-  if (timerCount < 40 && 0 <= timerCount) {
+  if (timerCount < 42 && 0 <= timerCount) {
     //Top banner with text and timer
     noStroke();
     fill(255);
