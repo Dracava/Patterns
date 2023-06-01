@@ -9,9 +9,9 @@ let secondsColorB = 0;
 let drawingCanvas, saveImage;
 let drawingCommands = [];
 
-let timerStart = 41;
+let timerStart = 31;
 let timerLength = 1000;
-let timerCount = 41;
+let timerCount = 31;
 
 let mirrorZoom = 1;
 let boardZoom = 1;
@@ -102,7 +102,7 @@ function stateEdit() {
     timerStart = millis();
   }
 
-  if (timerCount < 20 && timerCount > 10) {
+  if (timerCount < 15 && timerCount > 10) {
     py = pmouseY - 100;
     px = pmouseX - 100;
     y = mouseY - 100;
@@ -116,7 +116,7 @@ function stateEdit() {
   }
 
   //Timer countdown
-  if (timerCount < 40 && 0 <= timerCount) {
+  if (timerCount < 30 && 0 <= timerCount) {
     //Top banner with text and timer
     noStroke();
     fill(255);
