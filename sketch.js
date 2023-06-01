@@ -306,9 +306,9 @@ function restartDrawing() {
 
   drawingCommands = [];
 
-  timerStart = 10;
+  timerStart = 41;
   timerLength = 1000;
-  timerCount = 10;
+  timerCount = 41;
 
   mirrorZoom = 1;
 
