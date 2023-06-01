@@ -1,4 +1,4 @@
-let penSize = 3;
+let penSize = 5;
 let penState = 0;
 let penColor = 0;
 
@@ -9,9 +9,9 @@ let secondsColorB = 0;
 let drawingCanvas, saveImage;
 let drawingCommands = [];
 
-let timerStart = 41;
+let timerStart = 10;
 let timerLength = 1000;
-let timerCount = 41;
+let timerCount = 10;
 
 let mirrorZoom = 1;
 let boardZoom = 1;
@@ -102,13 +102,13 @@ function stateEdit() {
     timerStart = millis();
   }
 
-  if (timerCount < 10 && timerCount > 5) {
+  if (timerCount <= 10 && timerCount > 5) {
+    secondsColorR = 255;
     py = pmouseY - 100;
     px = pmouseX - 100;
     y = mouseY - 100;
     x = mouseX - 100;
   } else if (timerCount <= 5 && 0 <= timerCount) {
-    secondsColorR = 255;
     px = width - mouseX;
     py = height - mouseY;
     x = width - pmouseX;
@@ -273,11 +273,14 @@ function takeScreenshot() {
   screenshots[currentOption] = get(0, 0, width, height);
   image(pattern, 0, 0, width, height);
   currentOption++;
+  pattern.save('pattern', 'png');
 }
 
 function drawGrid() {
   const gridWidth = width / GRID_SIZE;
   const gridHeight = height / GRID_SIZE;
+  let screenshotWidth = width;
+  let screenshotHeight = height;
   let optionIndex = 0;
   background(255);
 
@@ -306,9 +309,9 @@ function restartDrawing() {
 
   drawingCommands = [];
 
-  timerStart = 41;
+  timerStart = 10;
   timerLength = 1000;
-  timerCount = 41;
+  timerCount = 10;
 
   mirrorZoom = 1;
 
