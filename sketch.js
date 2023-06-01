@@ -107,7 +107,7 @@ function stateEdit() {
     px = pmouseX - 100;
     y = mouseY - 100;
     x = mouseX - 100;
-  } else if (timerCount <= 5 && 0 <= timerCount) {
+  } else if (timerCount <= 10 && 0 <= timerCount) {
     secondsColorR = 255;
     px = width - mouseX;
     py = height - mouseY;
@@ -253,6 +253,9 @@ function confirmStart() {
 }
 
 function mouseClicked() {
+  if (timerCount <= 25) {
+    clearButton.position(-100, -100);
+  }
   if (dist(mouseX, mouseY, width - 50, 0) <= 50) {
     if (timerCount < -5) {
       state = stateRevealMirror;
