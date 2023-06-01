@@ -256,9 +256,6 @@ function confirmStart() {
 }
 
 function mouseClicked() {
-  if (timerCount <= 25) {
-    clearButton.position(-100, -100);
-  }
   if (dist(mouseX, mouseY, width - 100, 0) <= 100) {
     if (timerCount < -5) {
       state = stateRevealMirror;
