@@ -76,7 +76,7 @@ function setState(newState) {
 }
 
 function stateStart() {
-  restartButton.position(width + 100, height + 100);
+  restartButton.position(-100, -100);
   background(255);
   fill(0);
   noStroke();
@@ -162,8 +162,8 @@ function stateEdit() {
 }
 
 function stateRevealMirror() {
-  gridButton.position(windowWidth + 100, windowHeight + 100);
-  clearButton.position(windowWidth + 100, windowHeight + 100);
+  gridButton.position(-100, -100);
+  clearButton.position(-100, -100);
   scale(mirrorZoom);
   translate(0, 0);
   background(255);
@@ -248,7 +248,7 @@ function confirmStart() {
   background(255);
   clearButton.position(10, 10);
   gridButton.position(90, 10);
-  confirmButton.position(windowWidth + 100, windowHeight + 100);
+  confirmButton.position(-100, -100);
   state = stateEdit;
 }
 
@@ -286,7 +286,7 @@ function drawGrid() {
       }
       optionIndex++;
       if (mouseIsPressed) {
-        restartButton.position(windowWidth / 2 - 30, windowHeight / 2 - 30);
+        restartButton.position(width / 2 - 30, height / 2 - 30);
       }
     }
   }
