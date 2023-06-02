@@ -319,6 +319,12 @@ function confirmStart() {
   state = stateEdit;
 }
 
+function mousePressed(){
+      if (timerCount <= 20) {
+    clearButton.position(-100, -100);
+  }
+}
+
 function mouseClicked() {
   if (dist(mouseX, mouseY, width - 100, 0) <= 100) {
     if (timerCount < -5) {
