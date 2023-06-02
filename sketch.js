@@ -30,7 +30,7 @@ let pattern;
 let state;
 let stateStartMillis;
 
-const GRID_SIZE = 4;
+const GRID_SIZE = 5;
 const MAX_OPTIONS = GRID_SIZE * GRID_SIZE;
 let screenshots = [];
 let currentOption = 0;
@@ -273,7 +273,8 @@ function takeScreenshot() {
   screenshots[currentOption] = get(0, 0, width, height);
   image(pattern, 0, 0, width, height);
   currentOption++;
-  pattern.save('pattern', 'png');
+  //pattern.save('pattern', 'png');
+  //print();
 }
 
 function drawGrid() {
