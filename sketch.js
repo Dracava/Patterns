@@ -174,6 +174,8 @@ function stateEdit() {
         py = pmouseY;
       }
     }
+  } else{
+        setLineDash([0, 0]);
   }
 
   //Timer countdown
@@ -228,13 +230,13 @@ function stateRevealMirror() {
   gridButton.position(-100, -100);
   clearButton.position(-100, -100);
   scale(mirrorZoom);
+      setLineDash([0, 0]);
   translate(0, 0);
   background(255);
   for (let i = 0; i < drawingCommands.length; i++) {
     let [px, py, x, y] = drawingCommands[i];
     stroke(penColor);
     strokeWeight(penSize);
-    setLineDash([0, 0]);
     line(px, py, x, y);
     line(width * 2 - x, y, width * 2 - px, py);
     line(x, height * 2 - y, px, height * 2 - py);
