@@ -105,12 +105,14 @@ function stateEdit() {
     timerCount--;
     timerStart = millis();
   }
+    if (timerCount <= 10 && 0 <= timerCount) {
+    secondsColorR = 255;
+  }
 
   if (
     (timerCount <= 25 && timerCount > 20) ||
     (timerCount <= 10 && 0 <= timerCount)
   ) {
-    secondsColorR = 255;
     //Mirrored drawing
     if (
       currentOption == 0 ||
@@ -199,10 +201,6 @@ function stateEdit() {
         drawingCommands.push([px, py, x, y]);
       }
     }
-  }
-
-  if (timerCount <= 10 && 0 <= timerCount) {
-    secondsColorR = 255;
   }
 
   if (timerCount < 0) {
