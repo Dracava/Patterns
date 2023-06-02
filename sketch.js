@@ -148,7 +148,7 @@ function stateEdit() {
       currentOption == 20
     ) {
       penColor = 255;
-      penSize = 14;
+      penSize = 20;
     }
     //Line to spotted
     else if (
