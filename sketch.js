@@ -110,7 +110,7 @@ function stateEdit() {
     secondsColorR = 255;
     //Mirrored drawing
     if (
-      //currentOption == 0 ||
+      currentOption == 0 ||
       currentOption == 6 ||
       currentOption == 12 ||
       currentOption == 18 ||
@@ -367,7 +367,7 @@ function restartDrawing() {
   secondsColorB = 0;
 
   penColor = 0;
-  penColor = 5;
+  penSize = 10;
 
   drawingCommands = [];
 
