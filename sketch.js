@@ -106,7 +106,10 @@ function stateEdit() {
     timerStart = millis();
   }
 
-  if (timerCount <= 10 && 0 <= timerCount) {
+  if (
+    (timerCount <= 25 && timerCount > 20) ||
+    (timerCount <= 10 && 0 <= timerCount)
+  ) {
     secondsColorR = 255;
     //Mirrored drawing
     if (
@@ -163,10 +166,10 @@ function stateEdit() {
       currentOption == 16 ||
       currentOption == 22
     ) {
-      if(timerCount % 2){
-      py = pmouseY - 20;
-      } else{
-      py = pmouseY;
+      if (timerCount % 2) {
+        py = pmouseY - 20;
+      } else {
+        py = pmouseY;
       }
     }
   }
@@ -196,6 +199,10 @@ function stateEdit() {
         drawingCommands.push([px, py, x, y]);
       }
     }
+  }
+
+  if (timerCount <= 10 && 0 <= timerCount) {
+    secondsColorR = 255;
   }
 
   if (timerCount < 0) {
