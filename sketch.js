@@ -1,4 +1,4 @@
-let penSize = 5;
+let penSize = 10;
 let penState = 0;
 let penColor = 0;
 
