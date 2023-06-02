@@ -229,6 +229,7 @@ function stateRevealMirror() {
     let [px, py, x, y] = drawingCommands[i];
     stroke(penColor);
     strokeWeight(penSize);
+    setLineDash([0, 0]);
     line(px, py, x, y);
     line(width * 2 - x, y, width * 2 - px, py);
     line(x, height * 2 - y, px, height * 2 - py);
