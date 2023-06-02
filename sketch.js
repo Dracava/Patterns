@@ -105,7 +105,7 @@ function stateEdit() {
     timerCount--;
     timerStart = millis();
   }
-    if (timerCount <= 10 && 0 <= timerCount) {
+  if (timerCount <= 10 && 0 <= timerCount) {
     secondsColorR = 255;
   }
 
@@ -148,7 +148,7 @@ function stateEdit() {
       currentOption == 20
     ) {
       penColor = 255;
-      penSize = 20;
+      penSize = 25;
     }
     //Line to spotted
     else if (
@@ -174,8 +174,9 @@ function stateEdit() {
         py = pmouseY;
       }
     }
-  } else{
-        setLineDash([0, 0]);
+  } else {
+    setLineDash([0, 0]);
+    penColor = 0;
   }
 
   //Timer countdown
@@ -230,11 +231,12 @@ function stateRevealMirror() {
   gridButton.position(-100, -100);
   clearButton.position(-100, -100);
   scale(mirrorZoom);
-      setLineDash([0, 0]);
+  setLineDash([0, 0]);
   translate(0, 0);
   background(255);
   for (let i = 0; i < drawingCommands.length; i++) {
     let [px, py, x, y] = drawingCommands[i];
+    penColor = 0;
     stroke(penColor);
     strokeWeight(penSize);
     line(px, py, x, y);
@@ -321,8 +323,8 @@ function confirmStart() {
   state = stateEdit;
 }
 
-function mousePressed(){
-      if (timerCount <= 20) {
+function mousePressed() {
+  if (timerCount <= 20) {
     clearButton.position(-100, -100);
   }
 }
