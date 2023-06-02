@@ -148,7 +148,7 @@ function stateEdit() {
       currentOption == 20
     ) {
       penColor = 255;
-      penSize = 8;
+      penSize = 14;
     }
     //Line to spotted
     else if (
@@ -205,7 +205,7 @@ function stateEdit() {
 
   if (timerCount < 0) {
     penColor = 0;
-    penSize = 5;
+    penSize = 10;
     if (timerCount > -5) {
       noStroke();
       fill(255);
