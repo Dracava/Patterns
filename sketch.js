@@ -9,9 +9,9 @@ let secondsColorB = 0;
 let drawingCanvas, saveImage;
 let drawingCommands = [];
 
-let timerStart = 10;
+let timerStart = 41;
 let timerLength = 1000;
-let timerCount = 10;
+let timerCount = 41;
 
 let mirrorZoom = 1;
 let boardZoom = 1;
@@ -81,13 +81,17 @@ function stateStart() {
   fill(0);
   noStroke();
   textSize(25);
-  let introText1 = "Draw a pattern on the white canvas.";
-  let introText2 = "Click the button to start the experience.";
+  let introText1 = "Draw a pattern on the white canvas";
   let introWidth1 = textWidth(introText1);
+  text(introText1, width / 2 - introWidth1 / 2, height / 2 - 80);
+  textSize(20);
+  let introText2 = "Make sure to use the entire screen";
   let introWidth2 = textWidth(introText2);
-  text(introText1, width / 2 - introWidth1 / 2, height / 2 - 50);
-  text(introText2, width / 2 - introWidth2 / 2, height / 2 - 20);
-  confirmButton.position(width / 2 - 40, height / 2 + 15);
+  text(introText2, width / 2 - introWidth2 / 2, height / 2 - 30);
+  let introText3 = "Click the button to start the experience";
+  let introWidth3 = textWidth(introText3);
+  text(introText3, width / 2 - introWidth3 / 2, height / 2);
+  confirmButton.position(width / 2 - 40, height / 2 + 30);
 }
 
 function stateEdit() {
@@ -102,17 +106,64 @@ function stateEdit() {
     timerStart = millis();
   }
 
-  if (timerCount <= 10 && timerCount > 5) {
+  if (timerCount <= 10 && 0 <= timerCount) {
     secondsColorR = 255;
-    py = pmouseY - 100;
-    px = pmouseX - 100;
-    y = mouseY - 100;
-    x = mouseX - 100;
-  } else if (timerCount <= 5 && 0 <= timerCount) {
-    px = width - mouseX;
-    py = height - mouseY;
-    x = width - pmouseX;
-    y = height - pmouseY;
+    //Mirrored drawing
+    if (
+      //currentOption == 0 ||
+      currentOption == 6 ||
+      currentOption == 12 ||
+      currentOption == 18 ||
+      currentOption == 24
+    ) {
+      px = width - mouseX;
+      py = height - mouseY;
+      x = width - pmouseX;
+      y = height - pmouseY;
+    }
+    //Offset
+    else if (
+      currentOption == 4 ||
+      currentOption == 5 ||
+      currentOption == 11 ||
+      currentOption == 17 ||
+      currentOption == 23
+    ) {
+      py = pmouseY - 100;
+      px = pmouseX - 100;
+      y = mouseY - 100;
+      x = mouseX - 100;
+    }
+    //Pen to eraser
+    else if (
+      currentOption == 1 ||
+      currentOption == 7 ||
+      currentOption == 13 ||
+      currentOption == 19 ||
+      currentOption == 20
+    ) {
+      penColor = 255;
+      penSize = 8;
+    }
+    //Line to spotted
+    else if (
+      currentOption == 2 ||
+      currentOption == 8 ||
+      currentOption == 14 ||
+      currentOption == 15 ||
+      currentOption == 21
+    ) {
+      setLineDash([10, 10]);
+    }
+    //Delay
+    else if (
+      currentOption == 0 ||
+      currentOption == 9 ||
+      currentOption == 10 ||
+      currentOption == 16 ||
+      currentOption == 22
+    ) {
+    }
   }
 
   //Timer countdown
@@ -133,7 +184,7 @@ function stateEdit() {
     //Draw line
     if (mouseIsPressed) {
       if (y > 50) {
-        stroke(0);
+        stroke(penColor);
         strokeWeight(penSize);
         line(px, py, x, y);
         // Store drawing commands
@@ -143,6 +194,8 @@ function stateEdit() {
   }
 
   if (timerCount < 0) {
+    penColor = 0;
+    penColor = 5;
     if (timerCount > -5) {
       noStroke();
       fill(255);
@@ -169,7 +222,7 @@ function stateRevealMirror() {
   background(255);
   for (let i = 0; i < drawingCommands.length; i++) {
     let [px, py, x, y] = drawingCommands[i];
-    stroke(0);
+    stroke(penColor);
     strokeWeight(penSize);
     line(px, py, x, y);
     line(width * 2 - x, y, width * 2 - px, py);
@@ -238,7 +291,7 @@ function viewGrid() {
     background(255);
     for (let i = 0; i < drawingCommands.length; i++) {
       let [px, py, x, y] = drawingCommands[i];
-      stroke(0);
+      stroke(penColor);
       strokeWeight(penSize);
       line(px, py, x, y);
       gridVisible = false;
@@ -308,11 +361,14 @@ function restartDrawing() {
   secondsColorG = 0;
   secondsColorB = 0;
 
+  penColor = 0;
+  penColor = 5;
+
   drawingCommands = [];
 
-  timerStart = 10;
+  timerStart = 41;
   timerLength = 1000;
-  timerCount = 10;
+  timerCount = 41;
 
   mirrorZoom = 1;
 
@@ -327,4 +383,8 @@ function restartDrawing() {
 function touchMoved() {
   //Prevent scrolling and refreshing screen
   return false;
+}
+
+function setLineDash(list) {
+  drawingContext.setLineDash(list);
 }
