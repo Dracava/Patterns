@@ -158,7 +158,7 @@ function stateEdit() {
       currentOption == 15 ||
       currentOption == 21
     ) {
-      setLineDash([10, 10]);
+      setLineDash([15, 15]);
     }
     //Delay
     else if (
@@ -376,6 +376,7 @@ function restartDrawing() {
   penSize = 10;
 
   drawingCommands = [];
+  setLineDash([0, 0]);
 
   timerStart = 41;
   timerLength = 1000;
