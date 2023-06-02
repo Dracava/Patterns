@@ -157,12 +157,17 @@ function stateEdit() {
     }
     //Delay
     else if (
-      currentOption == 0 ||
+      currentOption == 3 ||
       currentOption == 9 ||
       currentOption == 10 ||
       currentOption == 16 ||
       currentOption == 22
     ) {
+      if(timerCount % 2){
+      py = pmouseY - 20;
+      } else{
+      py = pmouseY;
+      }
     }
   }
 
@@ -195,7 +200,7 @@ function stateEdit() {
 
   if (timerCount < 0) {
     penColor = 0;
-    penColor = 5;
+    penSize = 5;
     if (timerCount > -5) {
       noStroke();
       fill(255);
