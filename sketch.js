@@ -177,6 +177,7 @@ function stateEdit() {
   } else {
     setLineDash([0, 0]);
     penColor = 0;
+    penSize = 10;
   }
 
   //Timer countdown
@@ -347,8 +348,8 @@ function takeScreenshot() {
   screenshots[currentOption] = get(0, 0, width, height);
   image(pattern, 0, 0, width, height);
   currentOption++;
-  //pattern.save('pattern', 'png');
-  //print();
+  pattern.save('pattern', 'png');
+  print();
 }
 
 function drawGrid() {
