@@ -249,7 +249,9 @@ function stateRevealMirror() {
     mirrorZoom *= 0.995;
   } else if (mirrorZoom <= 0.5) {
     pattern = get(0, 0, width, height);
+    if(mouseIsPressed){
     pattern.save('pattern', 'png');
+    }
   }
 }
 
