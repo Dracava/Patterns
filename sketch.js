@@ -80,14 +80,14 @@ function stateStart() {
   background(255);
   fill(0);
   noStroke();
-  textSize(35);
+  textSize(45);
   let introText1 = "Draw a pattern on the white canvas";
   let introWidth1 = textWidth(introText1);
-  text(introText1, width / 2 - introWidth1 / 2, height / 2 - 80);
-  textSize(28);
+  text(introText1, width / 2 - introWidth1 / 2, height / 2 - 120);
+  textSize(32);
   let introText2 = "Make sure to use the entire screen";
   let introWidth2 = textWidth(introText2);
-  text(introText2, width / 2 - introWidth2 / 2, height / 2 - 30);
+  text(introText2, width / 2 - introWidth2 / 2, height / 2 - 60);
   let introText3 = "Click the button to start the experience";
   let introWidth3 = textWidth(introText3);
   text(introText3, width / 2 - introWidth3 / 2, height / 2);
