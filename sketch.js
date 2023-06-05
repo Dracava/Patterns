@@ -9,9 +9,9 @@ let secondsColorB = 0;
 let drawingCanvas, saveImage;
 let drawingCommands = [];
 
-let timerStart = 41;
+let timerStart = 10;
 let timerLength = 1000;
-let timerCount = 41;
+let timerCount = 10;
 
 let mirrorZoom = 1;
 let boardZoom = 1;
@@ -80,11 +80,11 @@ function stateStart() {
   background(255);
   fill(0);
   noStroke();
-  textSize(25);
+  textSize(35);
   let introText1 = "Draw a pattern on the white canvas";
   let introWidth1 = textWidth(introText1);
   text(introText1, width / 2 - introWidth1 / 2, height / 2 - 80);
-  textSize(20);
+  textSize(28);
   let introText2 = "Make sure to use the entire screen";
   let introWidth2 = textWidth(introText2);
   text(introText2, width / 2 - introWidth2 / 2, height / 2 - 30);
@@ -185,19 +185,21 @@ function stateEdit() {
     //Top banner with text and timer
     noStroke();
     fill(255);
-    rect(0, 0, width, 50);
+    rect(0, 0, width, 100);
     fill(0);
-    textSize(18);
-    text("Draw a pattern", width / 2 - 70, 23);
-    textSize(12);
-    text("Time left:", width / 2 - 80, 42);
+    textSize(30);
+    let instructionText = "Draw a pattern";
+    let instructionTextWidth = textWidth(instructionText);
+    text(instructionText, width / 2 - instructionTextWidth / 2, 40);
+    textSize(25);
+    let timerText = "Time left:       seconds";
+    let timerTextWidth = textWidth(timerText);
+    text(timerText, width / 2 - timerTextWidth / 2, 75);
     fill(secondsColorR, secondsColorG, secondsColorB);
-    text(timerCount, width / 2 - 10, 42);
-    fill(0);
-    text("seconds", width / 2 + 10, 42);
+    text(timerCount, width / 2 - 5, 75);
     //Draw line
     if (mouseIsPressed) {
-      if (y > 50) {
+      if (y > 100) {
         stroke(penColor);
         strokeWeight(penSize);
         line(px, py, x, y);
@@ -213,17 +215,19 @@ function stateEdit() {
     if (timerCount > -5) {
       noStroke();
       fill(255);
-      rect(0, 0, width, 50);
+      rect(0, 0, width, 100);
       secondsColorR = 255;
       fill(0);
-      textSize(18);
-      text("Draw a pattern", width / 2 - 70, 23);
-      textSize(12);
-      text("Time left:", width / 2 - 80, 42);
+      textSize(30);
+      let instructionText = "Draw a pattern";
+      let instructionTextWidth = textWidth(instructionText);
+      text(instructionText, width / 2 - instructionTextWidth / 2, 40);
+      textSize(25);
+      let timerText = "Time left:       seconds";
+      let timerTextWidth = textWidth(timerText);
+      text(timerText, width / 2 - timerTextWidth / 2, 75);
       fill(secondsColorR, secondsColorG, secondsColorB);
-      text(0, width / 2 - 10, 42);
-      fill(0);
-      text("seconds", width / 2 + 10, 42);
+      text(0, width / 2 - 5, 75);
     }
   }
 }
@@ -348,7 +352,7 @@ function takeScreenshot() {
   screenshots[currentOption] = get(0, 0, width, height);
   image(pattern, 0, 0, width, height);
   currentOption++;
-  pattern.save('pattern', 'png');
+  pattern.save("pattern", "png");
 }
 
 function drawGrid() {
@@ -388,9 +392,9 @@ function restartDrawing() {
   drawingCommands = [];
   setLineDash([0, 0]);
 
-  timerStart = 41;
+  timerStart = 10;
   timerLength = 1000;
-  timerCount = 41;
+  timerCount = 10;
 
   mirrorZoom = 1;
 
