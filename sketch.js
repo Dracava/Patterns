@@ -249,6 +249,7 @@ function stateRevealMirror() {
     mirrorZoom *= 0.995;
   } else if (mirrorZoom <= 0.5) {
     pattern = get(0, 0, width, height);
+    pattern.save('pattern', 'png');
   }
 }
 
@@ -348,7 +349,6 @@ function takeScreenshot() {
   screenshots[currentOption] = get(0, 0, width, height);
   image(pattern, 0, 0, width, height);
   currentOption++;
-  pattern.save('pattern', 'png');
 }
 
 function drawGrid() {
