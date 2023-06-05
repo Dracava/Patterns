@@ -90,7 +90,7 @@ function stateStart() {
   text(introText2, width / 2 - introWidth2 / 2, height / 2 - 60);
   let introText3 = "Click the button to start the experience";
   let introWidth3 = textWidth(introText3);
-  text(introText3, width / 2 - introWidth3 / 2, height / 2);
+  text(introText3, width / 2 - introWidth3 / 2, height / 2 - 30);
   confirmButton.position(width / 2 - 70, height / 2 + 30);
 }
 
