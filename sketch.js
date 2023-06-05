@@ -191,12 +191,12 @@ function stateEdit() {
     let instructionText = "Draw a pattern";
     let instructionTextWidth = textWidth(instructionText);
     text(instructionText, width / 2 - instructionTextWidth / 2, 40);
-    textSize(25);
+    textSize(22);
     let timerText = "Time left:       seconds";
     let timerTextWidth = textWidth(timerText);
     text(timerText, width / 2 - timerTextWidth / 2, 75);
     fill(secondsColorR, secondsColorG, secondsColorB);
-    text(timerCount, width / 2 - 5, 75);
+    text(timerCount, width / 2 - 8, 75);
     //Draw line
     if (mouseIsPressed) {
       if (y > 100) {
@@ -222,12 +222,12 @@ function stateEdit() {
       let instructionText = "Draw a pattern";
       let instructionTextWidth = textWidth(instructionText);
       text(instructionText, width / 2 - instructionTextWidth / 2, 40);
-      textSize(25);
+      textSize(22);
       let timerText = "Time left:       seconds";
       let timerTextWidth = textWidth(timerText);
       text(timerText, width / 2 - timerTextWidth / 2, 75);
       fill(secondsColorR, secondsColorG, secondsColorB);
-      text(0, width / 2 - 5, 75);
+      text(0, width / 2 - 8, 75);
     }
   }
 }
