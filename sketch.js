@@ -185,18 +185,18 @@ function stateEdit() {
     //Top banner with text and timer
     noStroke();
     fill(255);
-    rect(0, 0, width, 100);
+    rect(0, 0, width, 150);
     fill(0);
-    textSize(30);
+    textSize(40);
     let instructionText = "Draw a pattern";
     let instructionTextWidth = textWidth(instructionText);
-    text(instructionText, width / 2 - instructionTextWidth / 2, 40);
-    textSize(22);
+    text(instructionText, width / 2 - instructionTextWidth / 2, 70);
+    textSize(32);
     let timerText = "Time left:       seconds";
     let timerTextWidth = textWidth(timerText);
-    text(timerText, width / 2 - timerTextWidth / 2, 75);
+    text(timerText, width / 2 - timerTextWidth / 2, 120);
     fill(secondsColorR, secondsColorG, secondsColorB);
-    text(timerCount, width / 2 - 8, 75);
+    text(timerCount, width / 2 - 8, 120);
     //Draw line
     if (mouseIsPressed) {
       if (y > 100) {
@@ -218,16 +218,16 @@ function stateEdit() {
       rect(0, 0, width, 100);
       secondsColorR = 255;
       fill(0);
-      textSize(30);
-      let instructionText = "Draw a pattern";
-      let instructionTextWidth = textWidth(instructionText);
-      text(instructionText, width / 2 - instructionTextWidth / 2, 40);
-      textSize(22);
-      let timerText = "Time left:       seconds";
-      let timerTextWidth = textWidth(timerText);
-      text(timerText, width / 2 - timerTextWidth / 2, 75);
-      fill(secondsColorR, secondsColorG, secondsColorB);
-      text(0, width / 2 - 8, 75);
+    textSize(40);
+    let instructionText = "Draw a pattern";
+    let instructionTextWidth = textWidth(instructionText);
+    text(instructionText, width / 2 - instructionTextWidth / 2, 70);
+    textSize(32);
+    let timerText = "Time left:       seconds";
+    let timerTextWidth = textWidth(timerText);
+    text(timerText, width / 2 - timerTextWidth / 2, 120);
+    fill(secondsColorR, secondsColorG, secondsColorB);
+    text(0, width / 2 - 8, 120);
     }
   }
 }
@@ -322,8 +322,8 @@ function viewGrid() {
 //Confirm starting drawing
 function confirmStart() {
   background(255);
-  clearButton.position(20, 10);
-  gridButton.position(width-150, 10);
+  clearButton.position(20, 40);
+  gridButton.position(width-160, 40);
   confirmButton.position(-100, -100);
   state = stateEdit;
 }
