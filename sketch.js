@@ -210,6 +210,7 @@ function stateEdit() {
   }
 
   if (timerCount < 0) {
+    setLineDash([0, 0]);
     penColor = 0;
     penSize = 10;
     if (timerCount > -5) {
@@ -235,8 +236,8 @@ function stateEdit() {
 function stateRevealMirror() {
   gridButton.position(-100, -100);
   clearButton.position(-100, -100);
-  scale(mirrorZoom);
   setLineDash([0, 0]);
+  scale(mirrorZoom);
   translate(0, 0);
   background(255);
   for (let i = 0; i < drawingCommands.length; i++) {
@@ -309,6 +310,7 @@ function viewGrid() {
     }
   } else {
     background(255);
+    setLineDash([0, 0]);
     for (let i = 0; i < drawingCommands.length; i++) {
       let [px, py, x, y] = drawingCommands[i];
       stroke(penColor);
