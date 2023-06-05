@@ -349,7 +349,6 @@ function takeScreenshot() {
   image(pattern, 0, 0, width, height);
   currentOption++;
   pattern.save('pattern', 'png');
-  print();
 }
 
 function drawGrid() {
