@@ -9,9 +9,9 @@ let secondsColorB = 0;
 let drawingCanvas, saveImage;
 let drawingCommands = [];
 
-let timerStart = 10;
+let timerStart = 41;
 let timerLength = 1000;
-let timerCount = 10;
+let timerCount = 41;
 
 let mirrorZoom = 1;
 let boardZoom = 1;
@@ -91,7 +91,7 @@ function stateStart() {
   let introText3 = "Click the button to start the experience";
   let introWidth3 = textWidth(introText3);
   text(introText3, width / 2 - introWidth3 / 2, height / 2);
-  confirmButton.position(width / 2 - 40, height / 2 + 30);
+  confirmButton.position(width / 2 - 70, height / 2 + 30);
 }
 
 function stateEdit() {
@@ -322,8 +322,8 @@ function viewGrid() {
 //Confirm starting drawing
 function confirmStart() {
   background(255);
-  clearButton.position(10, 10);
-  gridButton.position(90, 10);
+  clearButton.position(20, 10);
+  gridButton.position(width-150, 10);
   confirmButton.position(-100, -100);
   state = stateEdit;
 }
@@ -392,9 +392,9 @@ function restartDrawing() {
   drawingCommands = [];
   setLineDash([0, 0]);
 
-  timerStart = 10;
+  timerStart = 41;
   timerLength = 1000;
-  timerCount = 10;
+  timerCount = 41;
 
   mirrorZoom = 1;
 
