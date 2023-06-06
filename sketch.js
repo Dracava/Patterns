@@ -373,7 +373,7 @@ function drawGrid() {
       }
       optionIndex++;
       if (mouseIsPressed) {
-        restartButton.position(width / 2 - 40, height / 2);
+        restartButton.position(width / 2 - 80, height / 2);
       }
     }
   }
