@@ -9,9 +9,9 @@ let secondsColorB = 0;
 let drawingCanvas, saveImage;
 let drawingCommands = [];
 
-let timerStart = 10;
+let timerStart = 41;
 let timerLength = 1000;
-let timerCount = 10;
+let timerCount = 41;
 
 let mirrorZoom = 1;
 let boardZoom = 1;
@@ -389,9 +389,9 @@ function restartDrawing() {
 
   drawingCommands = [];
 
-  timerStart = 10;
+  timerStart = 41;
   timerLength = 1000;
-  timerCount = 10;
+  timerCount = 41;
 
   mirrorZoom = 1;
 
