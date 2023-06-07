@@ -268,7 +268,7 @@ function clearDrawing() {
     background(255);
     drawingCommands.length = 0;
   }
-  if (timerCount <= 35) {
+  if (timerCount <= 25) {
     clearButton.position(-100, -100);
   }
 }
