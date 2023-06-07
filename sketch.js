@@ -158,7 +158,7 @@ function stateEdit() {
       currentOption == 15 ||
       currentOption == 21
     ) {
-      setLineDash([15, 15]);
+      penSize = 50;
     }
     //Delay
     else if (
@@ -175,7 +175,6 @@ function stateEdit() {
       }
     }
   } else {
-    setLineDash([0, 0]);
     penColor = 0;
     penSize = 10;
   }
@@ -210,7 +209,6 @@ function stateEdit() {
   }
 
   if (timerCount < 0) {
-    setLineDash([0, 0]);
     penColor = 0;
     penSize = 10;
     if (timerCount > -5) {
@@ -236,7 +234,6 @@ function stateEdit() {
 function stateRevealMirror() {
   gridButton.position(-100, -100);
   clearButton.position(-100, -100);
-  setLineDash([0, 0]);
   scale(mirrorZoom);
   translate(0, 0);
   background(255);
@@ -310,7 +307,6 @@ function viewGrid() {
     }
   } else {
     background(255);
-    setLineDash([0, 0]);
     for (let i = 0; i < drawingCommands.length; i++) {
       let [px, py, x, y] = drawingCommands[i];
       stroke(penColor);
@@ -392,7 +388,6 @@ function restartDrawing() {
   penSize = 10;
 
   drawingCommands = [];
-  setLineDash([0, 0]);
 
   timerStart = 41;
   timerLength = 1000;
@@ -411,8 +406,4 @@ function restartDrawing() {
 function touchMoved() {
   //Prevent scrolling and refreshing screen
   return false;
-}
-
-function setLineDash(list) {
-  drawingContext.setLineDash(list);
 }
