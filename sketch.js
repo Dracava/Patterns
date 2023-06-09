@@ -119,7 +119,9 @@ function stateEdit() {
       currentOption == 6 ||
       currentOption == 12 ||
       currentOption == 18 ||
-      currentOption == 24
+      currentOption == 20 ||
+      currentOption == 3 ||
+      currentOption == 8
     ) {
       px = width - mouseX;
       py = height - mouseY;
@@ -134,18 +136,17 @@ function stateEdit() {
       currentOption == 17 ||
       currentOption == 23
     ) {
-      py = pmouseY - 100;
-      px = pmouseX - 100;
-      y = mouseY - 100;
-      x = mouseX - 100;
+      py = pmouseY + 100;
+      px = pmouseX + 100;
+      y = mouseY + 100;
+      x = mouseX + 100;
     }
     //Pen to eraser
     else if (
       currentOption == 1 ||
       currentOption == 7 ||
       currentOption == 13 ||
-      currentOption == 19 ||
-      currentOption == 20
+      currentOption == 19
     ) {
       if (timerCount % 2) {
       penColor = 255;
@@ -155,26 +156,24 @@ function stateEdit() {
       penSize = 10;
       }
     }
-    //Line to spotted
+    //Pensize bigger
     else if (
       currentOption == 2 ||
-      currentOption == 8 ||
       currentOption == 14 ||
       currentOption == 15 ||
       currentOption == 21
     ) {
       penSize = 50;
     }
-    //Delay
+    //Crooked lines
     else if (
-      currentOption == 3 ||
       currentOption == 9 ||
       currentOption == 10 ||
       currentOption == 16 ||
       currentOption == 22
     ) {
       if (timerCount % 2) {
-        py = pmouseY - 20;
+        py = pmouseY - 100;
       } else {
         py = pmouseY;
       }
